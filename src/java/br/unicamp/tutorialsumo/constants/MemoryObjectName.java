@@ -1,0 +1,30 @@
+package br.unicamp.tutorialsumo.constants;
+
+/**
+ * Created by Du on 05/01/16.
+ */
+public enum MemoryObjectName {
+    TRAFFICLIGHT_LINKS_PHASE,
+    TRAFFICLIGHT_PROGRAM_PHASES,
+    TRAFFICLIGHT_CHANGING_PHASE,
+    TRAFFICLIGHT_MEMORY_CHANGED,
+
+    LANE_VEHICLES_ID_LIST,
+    LANE_OCCUPANCY,
+    LANE_MEAN_VELOCITY,
+    LANE_MAX_VELOCITY,
+
+    STATE_AGENT,
+    ALL_MOS,
+
+    LANES_STATE,
+    AVERAGE_OCCUPANCY,
+    AVERAGE_MEAN_VELOCITY,
+    SUM_VEHICLES,
+
+    AGENT_LANES,
+    GOALS_MEMORY
+
+
+
+}
