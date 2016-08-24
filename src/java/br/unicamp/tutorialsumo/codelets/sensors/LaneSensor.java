@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2016  DCA-FEEC-UNICAMP
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Lesser Public License v3
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/lgpl.html
+ * <p>
+ * Contributors:
+ * E. M. Froes, R. R. Gudwin - initial API and implementation
+ ******************************************************************************/
+
 package br.unicamp.tutorialsumo.codelets.sensors;
 
 import br.unicamp.cst.core.entities.Codelet;
@@ -7,24 +18,32 @@ import br.unicamp.tutorialsumo.comunication.SingleAccessQuery;
 import br.unicamp.tutorialsumo.constants.MemoryObjectName;
 import it.polito.appeal.traci.Lane;
 import it.polito.appeal.traci.ReadObjectVarQuery;
-
 import java.util.*;
 
 /**
- * Created by Du on 06/01/16.
+ * LaneSensor class is sensor that retrieves data and information from a lane. These information are such as occupancy, maximum and mean velocity,
+ * and vehicles that there are on lane.
  */
 public class LaneSensor extends Codelet {
 
+    /**
+     * Attributes:
+     * Lane Object;
+     * Different of Memory Objects sucb as Occupation, Amount of Vehicles, Mean and Max of Vehicles Speed.
+     * Execution Timestamp.
+     */
     private Lane laneObject;
-
     private MemoryObject vehiclesMO;
     private MemoryObject occupancyMO;
     private MemoryObject meanVelocityMO;
     private MemoryObject maxVelocityMO;
-
     private int timestamp = 100;
 
-
+    /**
+     * LaneSensor Constructor.
+     * @param laneObject
+     * @param timestamp
+     */
     public LaneSensor(Lane laneObject, int timestamp){
 
         this.setLaneObject(laneObject);
@@ -32,15 +51,10 @@ public class LaneSensor extends Codelet {
         this.setTimestamp(timestamp);
     }
 
-    public synchronized void setLaneObject(Lane currentLane){
-        this.laneObject = currentLane;
-    }
 
-
-    public synchronized Lane getLaneObject(){
-        return this.laneObject;
-    }
-
+    /**
+     * This method is responsible for access the input and output memories of lane sensor.
+     */
     @Override
     public void accessMemoryObjects() {
 
@@ -57,6 +71,9 @@ public class LaneSensor extends Codelet {
             setMaxVelocityMO(this.getOutput(MemoryObjectName.LANE_MAX_VELOCITY.toString(), 0));
     }
 
+    /**
+     * Calculates activation value of lane sensor
+     */
     @Override
     public void calculateActivation() {
         try {
@@ -67,6 +84,9 @@ public class LaneSensor extends Codelet {
 
     }
 
+    /**
+     * Action that is performed by lane sensor.
+     */
     @Override
     public void proc() {
 
@@ -119,43 +139,101 @@ public class LaneSensor extends Codelet {
 
     }
 
+    /**
+     * Sets Lane Object
+     * @param currentLane
+     */
+    public synchronized void setLaneObject(Lane currentLane){
+        this.laneObject = currentLane;
+    }
 
+    /**
+     * Gets Lane Object.
+     * @return
+     */
+    public synchronized Lane getLaneObject(){
+        return this.laneObject;
+    }
+
+    /**
+     * Gets Vehicles Memory Object.
+     * @return
+     */
     public MemoryObject getVehiclesMO() {
         return vehiclesMO;
     }
 
+    /**
+     * Sets Vehicles Memory Object.
+     * @param vehiclesMO
+     */
     public void setVehiclesMO(MemoryObject vehiclesMO) {
         this.vehiclesMO = vehiclesMO;
     }
 
+
+    /**
+     * Gets Occupancy Memory Object.
+     * @return
+     */
     public MemoryObject getOccupancyMO() {
         return occupancyMO;
     }
 
+
+    /**
+     * Sets Occupancy Memory Object.
+     * @param occupancyMO
+     */
     public void setOccupancyMO(MemoryObject occupancyMO) {
         this.occupancyMO = occupancyMO;
     }
 
+    /**
+     * Gets Mean Velocity Memory Object.
+     * @return
+     */
     public MemoryObject getMeanVelocityMO() {
         return meanVelocityMO;
     }
 
+    /**
+     * Sets Mean Velocity Memory Object.
+     * @param meanVelocityMO
+     */
     public void setMeanVelocityMO(MemoryObject meanVelocityMO) {
         this.meanVelocityMO = meanVelocityMO;
     }
 
+
+    /**
+     * Gets Maximum Velocity Memory Object.
+     * @return
+     */
     public MemoryObject getMaxVelocityMO() {
         return maxVelocityMO;
     }
 
+    /**
+     * Sets Maximum Velocity Memory Object.
+     * @param maxVelocityMO
+     */
     public void setMaxVelocityMO(MemoryObject maxVelocityMO) {
         this.maxVelocityMO = maxVelocityMO;
     }
 
+    /**
+     * Gets Timestamp.
+     * @return
+     */
     public int getTimestamp() {
         return timestamp;
     }
 
+    /**
+     * Sets Timestamp.
+     * @param timestamp
+     */
     public void setTimestamp(int timestamp) {
         this.timestamp = timestamp;
     }
